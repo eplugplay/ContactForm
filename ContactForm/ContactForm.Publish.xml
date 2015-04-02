@@ -1,2 +1,4 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<publishData />
+<publishData>
+  <publishProfile publishUrl="https://donnas-fashion.com:8172/MsDeploy.axd" deleteExistingFiles="False" ftpAnonymousLogin="False" ftpPassiveMode="True" msdeploySite="eplugplay-001-site2" msdeploySiteID="" msdeployRemoteSitePhysicalPath="" msdeployAllowUntrustedCertificate="False" msdeploySkipExtraFilesOnServer="False" msdeployMarkAsApp="False" profileName="Profile1" publishMethod="MSDeploy" replaceMatchingFiles="True" userName="ifc\eplugplay-001" savePWD="False" userPWD="" SelectedForPublish="True" />
+</publishData>

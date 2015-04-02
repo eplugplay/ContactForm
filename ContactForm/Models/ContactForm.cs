@@ -27,6 +27,8 @@ namespace ContactForm.Models
         public string Phone { get; set; }
         [Required]
         public string Email { get; set; }
+        [Required]
+        public string Request { get; set; }
         public string Captcha { get; set; }
     }
 }

@@ -7,7 +7,7 @@ using System.Drawing.Imaging;
 using System.Drawing.Text;
 using System.Drawing.Drawing2D;
 
-namespace LAUF_Survey_Report
+namespace ContactForm
 {
     /// <summary>
     /// Summary description for Captcha

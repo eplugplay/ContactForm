@@ -32,7 +32,7 @@
    position: fixed;
    width: 528px;
    height: 70px;
-   top: 30%;
+   top: 50%;
    left: 46%;
    margin-left: -190px;
    margin-top: -100px;
@@ -300,6 +300,9 @@
              else if (txtName == "Email") {
                  $('.Email').focus();
              }
+             else if (txtName == "Request") {
+                 $('.Request').focus();
+             }
          }
      }
 
@@ -350,82 +353,90 @@
          var Zip = $('.Zip').val();
          var Phone = $('.Phone').val();
          var Email = $('.Email').val();
+         var Request = $('.Request').val();
          var CaptchaValue = $('.Captcha').val();
 
          if (ContactName == "") {
-             $('#dialog4').html("<table style=\"width: 100%; border: 0px;\" cellpadding=\"3\" cellspacing=\"0\"><tr><td colspan=\"2\" style=\"padding-left: 15px;\"><h3><div align=\"center\"><font color=\"#990000\">Please enter Contact Name</font></div></h3></td></tr><tr></tr></table><div class=\"btnOk4\"><input type=\"image\" id=\"ok4\" value=\"OK\" onclick=\"CloseMsg(4, 'ContactName');\" src=\"http://www.coastalflow.com/siteimages/Close Button.png\")\"; /></div>");
+             $('#dialog4').html("<table style=\"width: 100%; border: 0px;\" cellpadding=\"3\" cellspacing=\"0\"><tr><td colspan=\"2\" style=\"padding-left: 15px;\"><h3><div align=\"center\"><font color=\"#990000\">Please enter Contact Name</font></div></h3></td></tr><tr></tr></table><div class=\"btnOk4\"><input type=\"image\" id=\"ok4\" value=\"OK\" onclick=\"CloseMsg(4, 'ContactName');\" src=\"Content/Close Button.png\")\"; /></div>");
              ShowDialog(true, 4);
              $('.ContactName').focus();
              return false;
          }
 
          if (CompanyName == "") {
-             $('#dialog4').html("<table style=\"width: 100%; border: 0px;\" cellpadding=\"3\" cellspacing=\"0\"><tr><td colspan=\"2\" style=\"padding-left: 15px;\"><h3><div align=\"center\"><font color=\"#990000\">Please enter Company Name</font></div></h3></td></tr><tr></tr></table><div class=\"btnOk4\"><input type=\"image\" id=\"ok4\" value=\"OK\" onclick=\"CloseMsg(4, 'CompanyName');\" src=\"http://www.coastalflow.com/siteimages/Close Button.png\")\"; /></div>");
+             $('#dialog4').html("<table style=\"width: 100%; border: 0px;\" cellpadding=\"3\" cellspacing=\"0\"><tr><td colspan=\"2\" style=\"padding-left: 15px;\"><h3><div align=\"center\"><font color=\"#990000\">Please enter Company Name</font></div></h3></td></tr><tr></tr></table><div class=\"btnOk4\"><input type=\"image\" id=\"ok4\" value=\"OK\" onclick=\"CloseMsg(4, 'CompanyName');\" src=\"Close Button.png\")\"; /></div>");
              ShowDialog(true, 4);
              $('.CompanyName').focus();
              return false;
          }
 
          if (Address == "") {
-             $('#dialog4').html("<table style=\"width: 100%; border: 0px;\" cellpadding=\"3\" cellspacing=\"0\"><tr><td colspan=\"2\" style=\"padding-left: 15px;\"><h3><div align=\"center\"><font color=\"#990000\">Please enter Address</font></div></h3></td></tr><tr></tr></table><div class=\"btnOk4\"><input type=\"image\" id=\"ok4\" value=\"OK\" onclick=\"CloseMsg(4, 'Address');\" src=\"http://www.coastalflow.com/siteimages/Close Button.png\")\"; /></div>");
+             $('#dialog4').html("<table style=\"width: 100%; border: 0px;\" cellpadding=\"3\" cellspacing=\"0\"><tr><td colspan=\"2\" style=\"padding-left: 15px;\"><h3><div align=\"center\"><font color=\"#990000\">Please enter Address</font></div></h3></td></tr><tr></tr></table><div class=\"btnOk4\"><input type=\"image\" id=\"ok4\" value=\"OK\" onclick=\"CloseMsg(4, 'Address');\" src=\"Close Button.png\")\"; /></div>");
              ShowDialog(true, 4);
              $('.Address').focus();
              return false;
          }
 
          if (City == "") {
-             $('#dialog4').html("<table style=\"width: 100%; border: 0px;\" cellpadding=\"3\" cellspacing=\"0\"><tr><td colspan=\"2\" style=\"padding-left: 15px;\"><h3><div align=\"center\"><font color=\"#990000\">Please enter City</font></div></h3></td></tr><tr></tr></table><div class=\"btnOk4\"><input type=\"image\" id=\"ok4\" value=\"OK\" onclick=\"CloseMsg(4, 'City');\" src=\"http://www.coastalflow.com/siteimages/Close Button.png\")\"; /></div>");
+             $('#dialog4').html("<table style=\"width: 100%; border: 0px;\" cellpadding=\"3\" cellspacing=\"0\"><tr><td colspan=\"2\" style=\"padding-left: 15px;\"><h3><div align=\"center\"><font color=\"#990000\">Please enter City</font></div></h3></td></tr><tr></tr></table><div class=\"btnOk4\"><input type=\"image\" id=\"ok4\" value=\"OK\" onclick=\"CloseMsg(4, 'City');\" src=\"Close Button.png\")\"; /></div>");
              ShowDialog(true, 4);
              $('.City').focus();
              return false;
          }
 
          if (State == "") {
-             $('#dialog4').html("<table style=\"width: 100%; border: 0px;\" cellpadding=\"3\" cellspacing=\"0\"><tr><td colspan=\"2\" style=\"padding-left: 15px;\"><h3><div align=\"center\"><font color=\"#990000\">Please enter State</font></div></h3></td></tr><tr></tr></table><div class=\"btnOk4\"><input type=\"image\" id=\"ok4\" value=\"OK\" onclick=\"CloseMsg(4, 'State');\" src=\"http://www.coastalflow.com/siteimages/Close Button.png\")\"; /></div>");
+             $('#dialog4').html("<table style=\"width: 100%; border: 0px;\" cellpadding=\"3\" cellspacing=\"0\"><tr><td colspan=\"2\" style=\"padding-left: 15px;\"><h3><div align=\"center\"><font color=\"#990000\">Please enter State</font></div></h3></td></tr><tr></tr></table><div class=\"btnOk4\"><input type=\"image\" id=\"ok4\" value=\"OK\" onclick=\"CloseMsg(4, 'State');\" src=\"Close Button.png\")\"; /></div>");
              ShowDialog(true, 4);
              $('.State').focus();
              return false;
          }
 
          if (Zip == "") {
-             $('#dialog4').html("<table style=\"width: 100%; border: 0px;\" cellpadding=\"3\" cellspacing=\"0\"><tr><td colspan=\"2\" style=\"padding-left: 15px;\"><h3><div align=\"center\"><font color=\"#990000\">Please enter Zip</font></div></h3></td></tr><tr></tr></table><div class=\"btnOk4\"><input type=\"image\" id=\"ok4\" value=\"OK\" onclick=\"CloseMsg(4, 'Zip');\" src=\"http://www.coastalflow.com/siteimages/Close Button.png\")\"; /></div>");
+             $('#dialog4').html("<table style=\"width: 100%; border: 0px;\" cellpadding=\"3\" cellspacing=\"0\"><tr><td colspan=\"2\" style=\"padding-left: 15px;\"><h3><div align=\"center\"><font color=\"#990000\">Please enter Zip</font></div></h3></td></tr><tr></tr></table><div class=\"btnOk4\"><input type=\"image\" id=\"ok4\" value=\"OK\" onclick=\"CloseMsg(4, 'Zip');\" src=\"Close Button.png\")\"; /></div>");
              ShowDialog(true, 4);
              $('.Zip').focus();
              return false;
          }
 
          if (validateZip(Zip) == false) {
-             $('#dialog4').html("<table style=\"width: 100%; border: 0px;\" cellpadding=\"3\" cellspacing=\"0\"><tr><td colspan=\"2\" style=\"padding-left: 15px;\"><h3><div align=\"center\"><font color=\"#990000\">Please enter Valid Zip Code</font></div></h3></td></tr><tr></tr></table><div class=\"btnOk4\"><input type=\"image\" id=\"ok4\" value=\"OK\" onclick=\"CloseMsg(4, 'Zip');\" src=\"http://www.coastalflow.com/siteimages/Close Button.png\")\"; /></div>");
+             $('#dialog4').html("<table style=\"width: 100%; border: 0px;\" cellpadding=\"3\" cellspacing=\"0\"><tr><td colspan=\"2\" style=\"padding-left: 15px;\"><h3><div align=\"center\"><font color=\"#990000\">Please enter Valid Zip Code</font></div></h3></td></tr><tr></tr></table><div class=\"btnOk4\"><input type=\"image\" id=\"ok4\" value=\"OK\" onclick=\"CloseMsg(4, 'Zip');\" src=\"Close Button.png\")\"; /></div>");
              ShowDialog(true, 4);
              $('.Zip').focus();
              return false;
          }
 
          if (Phone == "") {
-             $('#dialog4').html("<table style=\"width: 100%; border: 0px;\" cellpadding=\"3\" cellspacing=\"0\"><tr><td colspan=\"2\" style=\"padding-left: 15px;\"><h3><div align=\"center\"><font color=\"#990000\">Please enter Phone Number</font></div></h3></td></tr><tr></tr></table><div class=\"btnOk4\"><input type=\"image\" id=\"ok4\" value=\"OK\" onclick=\"CloseMsg(4, 'Phone');\" src=\"http://www.coastalflow.com/siteimages/Close Button.png\")\"; /></div>");
+             $('#dialog4').html("<table style=\"width: 100%; border: 0px;\" cellpadding=\"3\" cellspacing=\"0\"><tr><td colspan=\"2\" style=\"padding-left: 15px;\"><h3><div align=\"center\"><font color=\"#990000\">Please enter Phone Number</font></div></h3></td></tr><tr></tr></table><div class=\"btnOk4\"><input type=\"image\" id=\"ok4\" value=\"OK\" onclick=\"CloseMsg(4, 'Phone');\" src=\"Close Button.png\")\"; /></div>");
              ShowDialog(true, 4);
              $('.Phone').focus();
              return false;
          }
 
          if (checkPhoneNumber(Phone) == false) {
-             $('#dialog4').html("<table style=\"width: 100%; border: 0px;\" cellpadding=\"3\" cellspacing=\"0\"><tr><td colspan=\"2\" style=\"padding-left: 15px;\"><h3><div align=\"center\"><font color=\"#990000\">Please enter a valid Phone Number</font></div></h3></td></tr><tr></tr></table><div class=\"btnOk4\"><input type=\"image\" id=\"ok4\" value=\"OK\" onclick=\"CloseMsg(4, 'Phone');\" src=\"http://www.coastalflow.com/siteimages/Close Button.png\")\"; /></div>");
+             $('#dialog4').html("<table style=\"width: 100%; border: 0px;\" cellpadding=\"3\" cellspacing=\"0\"><tr><td colspan=\"2\" style=\"padding-left: 15px;\"><h3><div align=\"center\"><font color=\"#990000\">Please enter a valid Phone Number</font></div></h3></td></tr><tr></tr></table><div class=\"btnOk4\"><input type=\"image\" id=\"ok4\" value=\"OK\" onclick=\"CloseMsg(4, 'Phone');\" src=\"Close Button.png\")\"; /></div>");
              ShowDialog(true, 4);
              $('.Phone').focus();
              return false;
          }
 
          if (Email == "") {
-             $('#dialog4').html("<table style=\"width: 100%; border: 0px;\" cellpadding=\"3\" cellspacing=\"0\"><tr><td colspan=\"2\" style=\"padding-left: 15px;\"><h3><div align=\"center\"><font color=\"#990000\">Please enter Email</font></div></h3></td></tr><tr></tr></table><div class=\"btnOk4\"><input type=\"image\" id=\"ok4\" value=\"OK\" onclick=\"CloseMsg(4, 'Email');\" src=\"http://www.coastalflow.com/siteimages/Close Button.png\")\"; /></div>");
+             $('#dialog4').html("<table style=\"width: 100%; border: 0px;\" cellpadding=\"3\" cellspacing=\"0\"><tr><td colspan=\"2\" style=\"padding-left: 15px;\"><h3><div align=\"center\"><font color=\"#990000\">Please enter Email</font></div></h3></td></tr><tr></tr></table><div class=\"btnOk4\"><input type=\"image\" id=\"ok4\" value=\"OK\" onclick=\"CloseMsg(4, 'Email');\" src=\"Close Button.png\")\"; /></div>");
              ShowDialog(true, 4);
              $('.Email').focus();
              return false;
          }
 
          if (checkEmail(Email) == false) {
-             $('#dialog4').html("<table style=\"width: 100%; border: 0px;\" cellpadding=\"3\" cellspacing=\"0\"><tr><td colspan=\"2\" style=\"padding-left: 15px;\"><h3><div align=\"center\"><font color=\"#990000\">Please enter a Valid Email</font></div></h3></td></tr><tr></tr></table><div class=\"btnOk4\"><input type=\"image\" id=\"ok4\" value=\"OK\" onclick=\"CloseMsg(4, 'Email');\" src=\"http://www.coastalflow.com/siteimages/Close Button.png\")\"; /></div>");
+             $('#dialog4').html("<table style=\"width: 100%; border: 0px;\" cellpadding=\"3\" cellspacing=\"0\"><tr><td colspan=\"2\" style=\"padding-left: 15px;\"><h3><div align=\"center\"><font color=\"#990000\">Please enter a Valid Email</font></div></h3></td></tr><tr></tr></table><div class=\"btnOk4\"><input type=\"image\" id=\"ok4\" value=\"OK\" onclick=\"CloseMsg(4, 'Email');\" src=\"Close Button.png\")\"; /></div>");
              ShowDialog(true, 4);
              $('.Email').focus();
+             return false;
+         }
+
+         if (Request == "") {
+             $('#dialog4').html("<table style=\"width: 100%; border: 0px;\" cellpadding=\"3\" cellspacing=\"0\"><tr><td colspan=\"2\" style=\"padding-left: 15px;\"><h3><div align=\"center\"><font color=\"#990000\">Please enter Request</font></div></h3></td></tr><tr></tr></table><div class=\"btnOk4\"><input type=\"image\" id=\"ok4\" value=\"OK\" onclick=\"CloseMsg(4, 'Request');\" src=\"Close Button.png\")\"; /></div>");
+             ShowDialog(true, 4);
+             $('.Request').focus();
              return false;
          }
 
@@ -456,7 +467,7 @@
                  type: "POST",
                  async: true,
                  url: '@Url.Action("PostForm", "Home")',
-                 data: { CompanyName: CompanyName, Address: Address, City: City, State: State, Zip: Zip, Phone: Phone, Email: Email, Captcha: CaptchaValue
+                 data: { ContactName: ContactName, CompanyName: CompanyName, Address: Address, City: City, State: State, Zip: Zip, Phone: Phone, Email: Email, Request: Request, Captcha: CaptchaValue
                  },
                  success: function (data) {
                      if (data == "Success") {
@@ -537,7 +548,7 @@
  <div id="MainBodyWrapper">
                 <br />
                <br />
- <div class="PageTitle">Contact Form
+ <div class="PageTitle">Rhinestone Empire - Contact Us
  </div>
        <br />
        <br />
@@ -636,6 +647,15 @@
        </td>
        </tr>
 
+           <tr>
+               <td>
+                   <div class="label">What would you like to request:</div>
+                   <div class="RequiredLabel">*</div>
+               </td>
+               <td>
+                   <div class="ControlPositions"> @Html.TextAreaFor(model => model.Request, new { @class = "Request", style = "width: 250px; height: 80px;" }) </div>
+               </td>
+           </tr>
        
 @*       <tr>
        <td colspan="2">

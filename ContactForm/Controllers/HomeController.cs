@@ -23,7 +23,7 @@ namespace ContactForm.Controllers
 
         [HttpPost]
         [ValidateInput(false)]
-        public ActionResult PostForm(string ContactName, string CompanyName, string Address, string City, string State, string Zip, string Phone, string Email, string Captcha)
+        public ActionResult PostForm(string ContactName, string CompanyName, string Address, string City, string State, string Zip, string Phone, string Email, string Request, string Captcha)
         {
             if (ModelState.IsValid)
             {
@@ -34,13 +34,14 @@ namespace ContactForm.Controllers
                 }
                 else
                 {
-                    string Msg = BuildMsg(ContactName, CompanyName, Address, City, State, Zip, Phone, Email);
+                    string Msg = BuildMsg(ContactName, CompanyName, Address, City, State, Zip, Phone, Email, Request);
                     string CustomerMsg = BuildCustomerMsg();
                     bool EmailSent = false;
                     try
                     {
                         // send email
-                        EmailSent = Classes.Email.SendEmail("steveyi32@gmail.com", "Rhinestone Empire - Contact Form", Msg);
+                        EmailSent = Classes.Email.SendEmail("chae.song20@gmail.com", "Rhinestone Empire - Contact Form", Msg);
+                        //EmailSent = Classes.Email.SendEmail("steve.yi@gmail.com", "Rhinestone Empire - Contact Form", Msg);
                         if (EmailSent == true)
                         {
                             try
@@ -68,10 +69,10 @@ namespace ContactForm.Controllers
             return View("Index");
         }
 
-        public string BuildMsg(string ContactName, string CompanyName, string Address, string City, string State, string Zip, string Phone, string Email)
+        public string BuildMsg(string ContactName, string CompanyName, string Address, string City, string State, string Zip, string Phone, string Email, string Request)
         {
             string ToReturn = "<br/>Contact Name: " + ContactName + "<br/>" + "Company Name: " + CompanyName + "<br/>" + "Address: " + Address + "<br/>" +
-                   "City: " + City + "<br/>" + "State: " + State + "<br/>" + "Zip: " + Zip + "<br/>" + "Phone: " + Phone + "<br/>" + "Email: " + Email + "<br/>" + "<br/>";
+                   "City: " + City + "<br/>" + "State: " + State + "<br/>" + "Zip: " + Zip + "<br/>" + "Phone: " + Phone + "<br/>" + "Email: " + Email + "<br/>" + "Request: " + Request + "<br/>";
             return ToReturn;
         }
 
