@@ -1,0 +1,679 @@
+﻿@model ContactForm.Models.ContactForm
+@using System.Web.UI.WebControls
+@{
+    ViewBag.Title = "Index";
+}
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js" type="text/javascript"></script>
+<script src=@Url.Content("~/Scripts/jquery-ui-1.10.4.custom.js") type="text/javascript"></script>
+
+
+<style type="text/css">
+.web_dialog_overlay
+{
+   position: fixed;
+   top: 0;
+   right: 0;
+   bottom: 0;
+   left: 0;
+   height: 100%;
+   width: 100%;
+   margin: 0;
+   padding: 0;
+   background: #000000;
+   opacity: .15;
+   filter: alpha(opacity=15);
+   -moz-opacity: .15;
+   z-index: 9999;
+   display: none;
+}
+.web_dialog
+{
+   display: none;
+   position: fixed;
+   width: 528px;
+   height: 70px;
+   top: 30%;
+   left: 46%;
+   margin-left: -190px;
+   margin-top: -100px;
+   background-color: #ffffff;
+   border: 2px solid #990000;
+   padding-left: 10px;
+   padding-right: 10px;
+   z-index: 99999;
+   font-family: Arial,Helvetica,sans-serif;
+   font-size: 12px;
+   line-height:150%;
+   color:#000000;
+}
+
+.web_dialog_overlay2
+{
+   position: fixed;
+   top: 0;
+   right: 0;
+   bottom: 0;
+   left: 0;
+   height: 100%;
+   width: 100%;
+   margin: 0;
+   padding: 0;
+   background: #000000;
+   opacity: .15;
+   filter: alpha(opacity=15);
+   -moz-opacity: .15;
+   z-index: 9999;
+   display: none;
+}
+.web_dialog2
+{
+   display: none;
+   position: fixed;
+   width: 528px;
+   height: 50px;
+   top: 50%;
+   left: 45%;
+   margin-left: -190px;
+   margin-top: -100px;
+   background-color: #ffffff;
+   border: 2px solid #990000;
+   padding-left: 10px;
+   padding-right: 10px;
+   z-index: 99999;
+   font-family: Arial,Helvetica,sans-serif;
+   font-size: 12px;
+   line-height:150%;
+   color:#000000;
+}
+
+.web_dialog_overlay3
+{
+   position: fixed;
+   top: 0;
+   right: 0;
+   bottom: 0;
+   left: 0;
+   height: 100%;
+   width: 100%;
+   margin: 0;
+   padding: 0;
+   background: #000000;
+   opacity: .15;
+   filter: alpha(opacity=15);
+   -moz-opacity: .15;
+   z-index: 9999;
+   display: none;
+}
+.web_dialog3
+{
+   display: none;
+   position: fixed;
+   width: 328px;
+   height: 50px;
+   top: 50%;
+   left: 50%;
+   margin-left: -190px;
+   margin-top: -100px;
+   background-color: #ffffff;
+   border: 2px solid #990000;
+   padding-left: 10px;
+   padding-right: 10px;
+   z-index: 99999;
+   font-family: Arial,Helvetica,sans-serif;
+   font-size: 12px;
+   line-height:150%;
+   color:#000000;
+}
+
+#dvLoading
+	{
+	   /*background:#ffffff url('../Content/themes/base/images/birddog.gif') no-repeat center center;
+	   height: 40px;
+	   width: 30px;*/
+	   position: absolute;
+	   /*background: url('../Content/themes/base/images/Loading.gif') no-repeat center center;*/
+	   height: 30px;
+	   width: 50px;
+	   position: fixed;
+	   z-index: 1000;
+	   left: 50%;
+	   top: 50%;
+	   margin: -25px 0 0 -25px;
+	   /*filter: alpha(opacity=50); /* internet explorer */
+       /*-khtml-opacity: 0.5;      /* khtml, old safari */
+       /*-moz-opacity: 0.5;       /* mozilla, netscape */
+       /*opacity: 0.5;           /* fx, safari, opera */
+	}
+	
+	.btnOk4
+	{
+	   position:absolute;
+	   left:325px; 
+	   top:31px;
+	}
+	
+.validation_dialog_overlay
+{
+   position: fixed;
+   top: 0;
+   right: 0;
+   bottom: 0;
+   left: 0;
+   height: 100%;
+   width: 100%;
+   margin: 0;
+   padding: 0;
+   background: #000000;
+   opacity: .15;
+   filter: alpha(opacity=15);
+   -moz-opacity: .15;
+   z-index: 9999;
+   display: none;
+}
+.validation_dialog
+{
+   display: none;
+   position: fixed;
+   width: 358px;
+   height: 50px;
+   top: 50%;
+   left: 50%;
+   margin-left: -190px;
+   margin-top: -100px;
+   background-color: #ffffff;
+   border: 2px solid #990000;
+   padding-left: 10px;
+   padding-right: 10px;
+   z-index: 99999;
+   font-family: Arial,Helvetica,sans-serif;
+   font-size: 12px;
+   line-height:150%;
+   color:#000000;
+}
+
+</style>
+
+
+ <script type="text/javascript">
+
+     $(document).ready(function () {
+         ResetCaptcha();
+     });
+
+     function CloseMsg(value, txtValue) {
+         HideDialog(value, txtValue);
+         //e.preventDefault();
+     }
+
+     function ShowDialog(modal, value) {
+         if (value == 1) {
+             $("#overlay").show();
+             $("#dialog").fadeIn(300);
+
+             if (modal) {
+                 $("#overlay").unbind("click");
+             }
+             else {
+                 $("#overlay").click(function (e) {
+                     HideDialog(1);
+                 });
+             }
+         }
+         else if (value == 2) {
+             $("#overlay2").show();
+             $("#dialog2").fadeIn(300);
+
+             if (modal) {
+                 $("#overlay2").unbind("click");
+             }
+             else {
+                 $("#overlay2").click(function (e) {
+                     HideDialog(2);
+                 });
+             }
+         }
+         else if (value == 3) {
+             $("#overlay3").show();
+             $("#dialog3").fadeIn(300);
+
+             if (modal) {
+                 $("#overlay3").unbind("click");
+             }
+             else {
+                 $("#overlay3").click(function (e) {
+                     HideDialog(3);
+                 });
+             }
+         }
+         else if (value == 4) {
+             $("#overlay4").show();
+             $("#dialog4").fadeIn(300);
+
+             if (modal) {
+                 $("#overlay4").unbind("click");
+             }
+             else {
+                 $("#overlay4").click(function (e) {
+                     HideDialog(4);
+                 });
+             }
+         }
+     }
+
+     function HideDialog(value, txtName) {
+         if (value == 1) {
+             $("#overlay").hide();
+             $("#dialog").fadeOut(300);
+         }
+         else if (value == 2) {
+             $("#overlay2").hide();
+             $("#dialog2").fadeOut(300);
+         }
+         else if (value == 3) {
+             $("#overlay3").hide();
+             $("#dialog3").fadeOut(300);
+         }
+         else if (value == 4) {
+             $("#overlay4").hide();
+             $("#dialog4").fadeOut(300);
+             if (txtName == "ContactName") {
+                 $('.ContactName').focus();
+             }
+             else if (txtName == "CompanyName") {
+                 $('.CompanyName').focus();
+             }
+             else if (txtName == "Address") {
+                 $('.Address').focus();
+             }
+             else if (txtName == "City") {
+                 $('.City').focus();
+             }
+             else if (txtName == "State") {
+                 $('.State').focus();
+             }
+             else if (txtName == "Zip") {
+                 $('.Zip').focus();
+             }
+             else if (txtName == "Phone") {
+                 $('.Phone').focus();
+             }
+             else if (txtName == "Email") {
+                 $('.Email').focus();
+             }
+         }
+     }
+
+     function validateZip(zip) {
+         if (/(^\d{5}$)|(^\d{5}-\d{4}$)/.test(zip)) {
+             return true;
+         }
+         return false;
+     }
+
+     function checkEmail(emailId) {
+         if (/^\w+([\.-]?\w+)*@@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(emailId)) {
+             return true;
+         }
+         return false;
+     }
+
+     function checkPhoneNumber(subjectString) {
+         var regexObj = /^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$/;
+         if (regexObj.test(subjectString)) {
+             var formattedPhoneNumber = subjectString.replace(regexObj, "($1) $2-$3");
+             var PhoneNo = $('.PhoneNo').val(formattedPhoneNumber);
+             return true;
+         } else {
+             return false;
+         }
+     }
+
+     function ClearInput(e) {
+         e.wrap('<form>').closest('form').get(0).reset();
+         e.unwrap();
+     }
+
+     function ResetCaptcha() {
+         $.post('@Url.Action("ResetSetCaptchaText", "Home")', {}, function (data) {
+             var img = document.getElementById("imgCaptcha");
+             img.src = '@Url.Content("~/Captcha.ashx?query=")' + Math.random();
+         });
+     }
+
+     function Validate() {
+         var ContactName = $('.ContactName').val();
+         var CompanyName = $('.CompanyName').val();
+         //var FoodType = $('#ddlFoodCook option:selected').text();
+         var Address = $('.Address').val();
+         var City = $('.City').val();
+         var State = $('.State').val();
+         var Zip = $('.Zip').val();
+         var Phone = $('.Phone').val();
+         var Email = $('.Email').val();
+         var CaptchaValue = $('.Captcha').val();
+
+         if (ContactName == "") {
+             $('#dialog4').html("<table style=\"width: 100%; border: 0px;\" cellpadding=\"3\" cellspacing=\"0\"><tr><td colspan=\"2\" style=\"padding-left: 15px;\"><h3><div align=\"center\"><font color=\"#990000\">Please enter Contact Name</font></div></h3></td></tr><tr></tr></table><div class=\"btnOk4\"><input type=\"image\" id=\"ok4\" value=\"OK\" onclick=\"CloseMsg(4, 'ContactName');\" src=\"http://www.coastalflow.com/siteimages/Close Button.png\")\"; /></div>");
+             ShowDialog(true, 4);
+             $('.ContactName').focus();
+             return false;
+         }
+
+         if (CompanyName == "") {
+             $('#dialog4').html("<table style=\"width: 100%; border: 0px;\" cellpadding=\"3\" cellspacing=\"0\"><tr><td colspan=\"2\" style=\"padding-left: 15px;\"><h3><div align=\"center\"><font color=\"#990000\">Please enter Company Name</font></div></h3></td></tr><tr></tr></table><div class=\"btnOk4\"><input type=\"image\" id=\"ok4\" value=\"OK\" onclick=\"CloseMsg(4, 'CompanyName');\" src=\"http://www.coastalflow.com/siteimages/Close Button.png\")\"; /></div>");
+             ShowDialog(true, 4);
+             $('.CompanyName').focus();
+             return false;
+         }
+
+         if (Address == "") {
+             $('#dialog4').html("<table style=\"width: 100%; border: 0px;\" cellpadding=\"3\" cellspacing=\"0\"><tr><td colspan=\"2\" style=\"padding-left: 15px;\"><h3><div align=\"center\"><font color=\"#990000\">Please enter Address</font></div></h3></td></tr><tr></tr></table><div class=\"btnOk4\"><input type=\"image\" id=\"ok4\" value=\"OK\" onclick=\"CloseMsg(4, 'Address');\" src=\"http://www.coastalflow.com/siteimages/Close Button.png\")\"; /></div>");
+             ShowDialog(true, 4);
+             $('.Address').focus();
+             return false;
+         }
+
+         if (City == "") {
+             $('#dialog4').html("<table style=\"width: 100%; border: 0px;\" cellpadding=\"3\" cellspacing=\"0\"><tr><td colspan=\"2\" style=\"padding-left: 15px;\"><h3><div align=\"center\"><font color=\"#990000\">Please enter City</font></div></h3></td></tr><tr></tr></table><div class=\"btnOk4\"><input type=\"image\" id=\"ok4\" value=\"OK\" onclick=\"CloseMsg(4, 'City');\" src=\"http://www.coastalflow.com/siteimages/Close Button.png\")\"; /></div>");
+             ShowDialog(true, 4);
+             $('.City').focus();
+             return false;
+         }
+
+         if (State == "") {
+             $('#dialog4').html("<table style=\"width: 100%; border: 0px;\" cellpadding=\"3\" cellspacing=\"0\"><tr><td colspan=\"2\" style=\"padding-left: 15px;\"><h3><div align=\"center\"><font color=\"#990000\">Please enter State</font></div></h3></td></tr><tr></tr></table><div class=\"btnOk4\"><input type=\"image\" id=\"ok4\" value=\"OK\" onclick=\"CloseMsg(4, 'State');\" src=\"http://www.coastalflow.com/siteimages/Close Button.png\")\"; /></div>");
+             ShowDialog(true, 4);
+             $('.State').focus();
+             return false;
+         }
+
+         if (Zip == "") {
+             $('#dialog4').html("<table style=\"width: 100%; border: 0px;\" cellpadding=\"3\" cellspacing=\"0\"><tr><td colspan=\"2\" style=\"padding-left: 15px;\"><h3><div align=\"center\"><font color=\"#990000\">Please enter Zip</font></div></h3></td></tr><tr></tr></table><div class=\"btnOk4\"><input type=\"image\" id=\"ok4\" value=\"OK\" onclick=\"CloseMsg(4, 'Zip');\" src=\"http://www.coastalflow.com/siteimages/Close Button.png\")\"; /></div>");
+             ShowDialog(true, 4);
+             $('.Zip').focus();
+             return false;
+         }
+
+         if (validateZip(Zip) == false) {
+             $('#dialog4').html("<table style=\"width: 100%; border: 0px;\" cellpadding=\"3\" cellspacing=\"0\"><tr><td colspan=\"2\" style=\"padding-left: 15px;\"><h3><div align=\"center\"><font color=\"#990000\">Please enter Valid Zip Code</font></div></h3></td></tr><tr></tr></table><div class=\"btnOk4\"><input type=\"image\" id=\"ok4\" value=\"OK\" onclick=\"CloseMsg(4, 'Zip');\" src=\"http://www.coastalflow.com/siteimages/Close Button.png\")\"; /></div>");
+             ShowDialog(true, 4);
+             $('.Zip').focus();
+             return false;
+         }
+
+         if (Phone == "") {
+             $('#dialog4').html("<table style=\"width: 100%; border: 0px;\" cellpadding=\"3\" cellspacing=\"0\"><tr><td colspan=\"2\" style=\"padding-left: 15px;\"><h3><div align=\"center\"><font color=\"#990000\">Please enter Phone Number</font></div></h3></td></tr><tr></tr></table><div class=\"btnOk4\"><input type=\"image\" id=\"ok4\" value=\"OK\" onclick=\"CloseMsg(4, 'Phone');\" src=\"http://www.coastalflow.com/siteimages/Close Button.png\")\"; /></div>");
+             ShowDialog(true, 4);
+             $('.Phone').focus();
+             return false;
+         }
+
+         if (checkPhoneNumber(Phone) == false) {
+             $('#dialog4').html("<table style=\"width: 100%; border: 0px;\" cellpadding=\"3\" cellspacing=\"0\"><tr><td colspan=\"2\" style=\"padding-left: 15px;\"><h3><div align=\"center\"><font color=\"#990000\">Please enter a valid Phone Number</font></div></h3></td></tr><tr></tr></table><div class=\"btnOk4\"><input type=\"image\" id=\"ok4\" value=\"OK\" onclick=\"CloseMsg(4, 'Phone');\" src=\"http://www.coastalflow.com/siteimages/Close Button.png\")\"; /></div>");
+             ShowDialog(true, 4);
+             $('.Phone').focus();
+             return false;
+         }
+
+         if (Email == "") {
+             $('#dialog4').html("<table style=\"width: 100%; border: 0px;\" cellpadding=\"3\" cellspacing=\"0\"><tr><td colspan=\"2\" style=\"padding-left: 15px;\"><h3><div align=\"center\"><font color=\"#990000\">Please enter Email</font></div></h3></td></tr><tr></tr></table><div class=\"btnOk4\"><input type=\"image\" id=\"ok4\" value=\"OK\" onclick=\"CloseMsg(4, 'Email');\" src=\"http://www.coastalflow.com/siteimages/Close Button.png\")\"; /></div>");
+             ShowDialog(true, 4);
+             $('.Email').focus();
+             return false;
+         }
+
+         if (checkEmail(Email) == false) {
+             $('#dialog4').html("<table style=\"width: 100%; border: 0px;\" cellpadding=\"3\" cellspacing=\"0\"><tr><td colspan=\"2\" style=\"padding-left: 15px;\"><h3><div align=\"center\"><font color=\"#990000\">Please enter a Valid Email</font></div></h3></td></tr><tr></tr></table><div class=\"btnOk4\"><input type=\"image\" id=\"ok4\" value=\"OK\" onclick=\"CloseMsg(4, 'Email');\" src=\"http://www.coastalflow.com/siteimages/Close Button.png\")\"; /></div>");
+             ShowDialog(true, 4);
+             $('.Email').focus();
+             return false;
+         }
+
+         var value;
+         function set_value(x) {
+             value = x;
+         }
+         $.ajaxSetup({ async: false });
+         $.post('@Url.Action("ReturnSession", "Home")', {}, function (data) {
+             if (data == CaptchaValue) {
+                 set_value(true);
+             }
+             else {
+                 set_value(false);
+             }
+         });
+
+         // show captcha error msg
+         if (value == false) {
+             ShowDialog(true, 3);
+             //e.preventDefault();
+             return false;
+         }
+         else {
+             $('#dvLoading').html('<img src="/Content/Loading.gif" />');
+
+             $.ajax({
+                 type: "POST",
+                 async: true,
+                 url: '@Url.Action("PostForm", "Home")',
+                 data: { CompanyName: CompanyName, Address: Address, City: City, State: State, Zip: Zip, Phone: Phone, Email: Email, Captcha: CaptchaValue
+                 },
+                 success: function (data) {
+                     if (data == "Success") {
+                         $('#dvLoading').empty();
+                         $('#FillForm').css('display', 'inline');
+                         $('#ReturnHome').css('display', 'inline');
+                         // show dialog
+                         $('#submitMsg').html("Form Successfully Submitted!");
+                         ShowDialog(true, 1);
+                     }
+                     else {
+                         $('#dvLoading').empty();
+                         // show dialog
+                         ShowDialog(true, 2);
+                     }
+                 }
+             });
+         }
+
+     }
+
+ </script>
+
+ <div id="dvLoading"></div>
+
+ <!--Success email message-->
+<div id="overlay" class="web_dialog_overlay"></div>
+<div id="dialog" class="web_dialog">
+   <table style="width: 100%; border: 0px;" cellpadding="3" cellspacing="0">
+      <tr>
+         <td colspan="2" style="padding-left: 5px;">
+           <div align="center"><font color="#990000" style="font-weight:bold;font-size:17px;">
+           <br />
+            <div id="submitMsg"></div></font>
+            </div>
+         </td>
+      </tr>
+   </table>
+      <div style="position:absolute;left:495px; top:51px;" ><input type="image" id="ok1" value="OK" onclick="CloseMsg(1)" src="@Url.Content("/Content/Close Button.png")" /></div>
+</div>
+
+<!--Email failed to send message-->
+<div id="overlay2" class="web_dialog_overlay2"></div>
+<div id="dialog2" class="web_dialog2">
+   <table style="width: 100%; border: 0px;" cellpadding="3" cellspacing="0">
+      <tr>
+         <td colspan="2" style="padding-left: 15px;">
+           <h3><div align="center"><font color="#990000">Email failed to send please try again.</font></div></h3>
+         </td>
+      </tr>
+      <tr>
+      </tr>
+   </table>
+   <div style="position:absolute;left:495px; top:31px;" ><input type="image" id="ok2" value="OK" onclick="CloseMsg(2)" src="@Url.Content("/Content/Close Button.png")" /></div>
+</div>
+
+<!--Enter Captcha message-->
+<div id="overlay3" class="web_dialog_overlay3"></div>
+<div id="dialog3" class="web_dialog3">
+   <table style="width: 100%; border: 0px;" cellpadding="3" cellspacing="0">
+      <tr>
+         <td colspan="2" style="padding-left: 15px;">
+           <h3><div align="center"><font color="#990000">Please re-enter captcha</font></div></h3>
+         </td>
+      </tr>
+      <tr>
+      </tr>
+   </table>
+   <div style="position:absolute;left:295px; top:31px;" ><input type="image" id="ok3" value="OK" onclick="CloseMsg(3)" src="@Url.Content("/Content/Close Button.png")" /></div>
+</div>
+
+<!--validation message-->
+<div id="overlay4" class="validation_dialog_overlay"></div>
+<div id="dialog4" class="validation_dialog">
+</div>
+
+
+ <div id="MainBodyWrapper">
+                <br />
+               <br />
+ <div class="PageTitle">Contact Form
+ </div>
+       <br />
+       <br />
+       <br />
+       <table style="margin-left:125px;border-collapse:collapse;" cellpadding="6";>
+       <tr style="background-color:#D5D5D5">
+       <td width="250px">
+         <div class="label">Contact Name:</div>
+         <div class="RequiredLabel">*</div>
+         </td>
+         <td width="350px">
+         <div class="ControlPositions">@Html.TextBoxFor(model => model.ContactName, new { @class = "ContactName", style = "width: 250px; height: 25px;" })</div>
+         </td>
+         </tr>
+         <tr>
+       <td>
+        <div class="label">Company Name:</div>
+        <div class="RequiredLabel">*</div>
+        </td>
+        <td>
+        <div class="ControlPositions"> @Html.TextBoxFor(model => model.CompanyName, new { @class = "CompanyName", style = "width: 250px; height: 25px;" }) </div>
+       </td>
+       </tr>
+
+@*        <tr style="background-color:#D5D5D5">
+        <td>
+         <div class="label">Dish:</div>
+         <div class="RequiredLabel">*</div>
+         </td>
+         <td>
+       <div class="ControlPositions"> @{ var listItems = new List<ListItem> { new ListItem { Text = "Crawfish", Value = "0" }, new ListItem { Text = "Gumbo", Value = "1" }, new ListItem { Text = "Crawfish & Gumbo", Value = "2" } }; }
+         @Html.DropDownListFor(model => model.FoodType, new SelectList(listItems, "Text", "Text"), null, new { @id = "ddlFoodCook", @style = "width: 255px;height: 30px;font-size:Large;" }) </div>
+       </td>
+       </tr>
+*@
+        <tr>
+       <td>
+        <div class="label">Address:</div>
+        <div class="RequiredLabel">*</div>
+        </td>
+        <td>
+         <div class="ControlPositions"> @Html.TextBoxFor(model => model.Address, new { @class = "Address", style = "width: 250px; height: 25px;" }) </div>
+       </td>
+       </tr>
+
+       <tr style="background-color:#D5D5D5">
+       <td>
+        <div class="label">City:</div>
+        <div class="RequiredLabel">*</div>
+        </td>
+        <td>
+        <div class="ControlPositions"> @Html.TextBoxFor(model => model.City, new { @class = "City", style = "width: 250px; height: 25px;" })</div>
+       </td>
+       </tr>
+
+       
+       <tr>
+       <td>
+        <div class="label">State:</div>
+        <div class="RequiredLabel">*</div>
+        </td>
+        <td>
+        <div class="ControlPositions"> @Html.TextBoxFor(model => model.State, new { @class = "State", style = "width: 250px; height: 25px;" }) </div>
+       </td>
+       </tr>
+
+        <tr style="background-color:#D5D5D5">
+       <td> 
+        <div class="label">Zip:</div>
+        <div class="RequiredLabel">*</div>
+        </td>
+        <td>
+        <div class="ControlPositions"> @Html.TextBoxFor(model => model.Zip, new { @class = "Zip", style = "width: 250px; height: 25px;" }) </div>
+       </td>
+       </tr>
+
+       
+       <tr>
+       <td>
+        <div class="label">Phone:</div>
+        <div class="RequiredLabel">*</div>
+        </td>
+        <td>
+         <div class="ControlPositions"> @Html.TextBoxFor(model => model.Phone, new { @class = "Phone", style = "width: 250px; height: 25px;" }) </div>
+       </td>
+       </tr>
+
+
+          <tr style="background-color:#D5D5D5">
+       <td>
+        <div class="label">Email:</div>
+        <div class="RequiredLabel">*</div>
+        </td>
+        <td>
+        <div class="ControlPositions"> @Html.TextBoxFor(model => model.Email, new { @class = "Email", style = "width: 250px; height: 25px;" }) </div>
+       </td>
+       </tr>
+
+       
+@*       <tr>
+       <td colspan="2">
+       <span style="float:right"><div class="RequiredLabel">*</div>Payment and additional info.<img src="@Url.Content("~/Content/themes/base/images/more-info.png")" style="cursor:hand;cursor:pointer;width:50px;height:20px;float:right;" id="Paymentinfo" onclick="ShowPaymentInfo();" /></span>
+       </td>
+       </tr>*@
+
+
+       <tr>
+       <td>
+       </td>
+       </tr>
+
+        <tr>
+       <td style="float:left">
+        <div style="font-size:medium;">
+        <div style="float:right">
+        <img id="imgCaptcha" src="@Url.Content("~/Captcha.ashx")"/>
+        </div>
+         </div>
+       </td>
+       </tr>
+
+       <tr>
+       <td style="width:380px;">
+         @Html.TextBoxFor(model => model.Captcha, new { @class = "Captcha", style = "width: 250px; height: 25px;" })
+       <img src="@Url.Content("~/Content/themes/base/images/refresh.png")" style="cursor:hand;cursor:pointer;width:30px;height:30px;float:right;margin-right:90px;" id="RefreshCaptcha" onclick="ResetCaptcha();" value="Refresh" />
+       </td>
+       </tr>
+
+       <tr>
+       <td>
+       <div style="float:right;margin-right:125px;"><input id="btnSubmit" style="color:Red;width:80px;height:40px;" type="submit" value="Submit" onclick="if(Validate()== false) return false;" /></div>
+       </td>
+       <td>
+       </td>
+       </tr>
+       </table>
+ </div>
+
+ 

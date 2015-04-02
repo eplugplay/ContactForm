@@ -1,0 +1,167 @@
+body
+{
+    background-image: url('../Content/themes/base/images/bg-fade.jpg');
+    background-repeat: repeat-x;
+    overflow-y:scroll;
+}
+
+header,
+footer,
+nav,
+section {
+    display: block;
+}
+
+/* Styles for basic forms
+-----------------------------------------------------------*/
+
+.bold
+{
+  font-weight:bold;   
+}
+
+fieldset 
+{
+    border:1px solid #ddd;
+    padding:0 1.4em 1.4em 1.4em;
+    margin:0 0 1.5em 0;
+}
+
+legend 
+{
+    font-size:1.2em;
+    font-weight: bold;
+}
+
+textarea 
+{
+    min-height: 75px;
+}
+
+.editor-label 
+{
+    margin: 1em 0 0 0;
+}
+
+.editor-field 
+{
+    margin:0.5em 0 0 0;
+}
+
+.label
+{
+    float: left;
+    display:inline;
+    font-size: large;
+}
+
+.RequiredLabel
+{
+    color: Red;
+    float:left;
+    display:inline;
+    font-weight:bold;
+}
+
+
+/* Styles for validation helpers
+-----------------------------------------------------------*/
+.field-validation-error
+{
+    color: #ff0000;
+}
+
+.field-validation-valid
+{
+    display: none;
+}
+
+.input-validation-error
+{
+    border: 1px solid #ff0000;
+    background-color: #ffeeee;
+}
+
+.validation-summary-errors
+{
+    font-weight: bold;
+    color: #ff0000;
+}
+
+.validation-summary-valid
+{
+    display: none;
+}
+
+/*Home page*/
+
+#MainWrapper {
+    width: 980px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#MainBodyWrapper {
+    width: 978px;
+    border-left: 2px solid #FFF;
+    border-right: 2px solid #FFF;
+    border-top: 2px solid #FFF;
+    background-color: #FFF;
+    margin: 0px auto 0px auto;
+    border: 1px solid #496077;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#HeaderWrapper 
+{
+    width: 976px;
+    height: 80px;
+    background-image: url('../Content/themes/base/images/header-glow.png');
+    background-repeat: no-repeat;
+    margin-top:-8px;
+}
+
+#MenuBar
+{
+	width:978px;
+	height:46px;
+	/*background-color: #007DB3;*/
+	background-image:url(../Content/themes/base/images/menu-bar.jpg);
+	/*background-repeat:no-repeat;*/
+	background-position:top left;
+}
+
+#LogoContainer {
+    height:80px;
+    width: 976px;
+}
+
+#BirdDogLogoContainer {
+    width: 121px;
+    height: 70px;
+    padding-top: 5px;
+    float: right;
+}
+
+#BirdDogLoginContainer {
+    width: 212px;
+    height: 50px;
+    overflow: hidden;
+    float: right;
+    padding-top: 22px;
+    padding-right: 3px;
+}
+
+.PageTitle {
+    text-align:center;
+    font-size:xx-large;
+    color:Black;
+    font-weight:bold;
+}
+
+.ControlPositions
+{
+    float:right;
+    margin-right:0px;
+}
