@@ -15,6 +15,16 @@ section {
 /* Styles for basic forms
 -----------------------------------------------------------*/
 
+#imgRhineStoneDiv
+{
+    text-align:center;
+}
+
+#imgRhineStone
+{
+    height:200px;
+}
+
 .bold
 {
   font-weight:bold;   

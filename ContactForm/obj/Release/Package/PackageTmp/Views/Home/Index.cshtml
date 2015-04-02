@@ -3,8 +3,6 @@
 @{
     ViewBag.Title = "Index";
 }
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js" type="text/javascript"></script>
-<script src=@Url.Content("~/Scripts/jquery-ui-1.10.4.custom.js") type="text/javascript"></script>
 
 
 <style type="text/css">
@@ -200,6 +198,21 @@
          ResetCaptcha();
      });
 
+
+     function LoadSecondaryMsg(msg) {
+         $("#popupwindow").dialog({
+             autoOpen: false,
+             modal: true,
+             show: "fade",
+             title: "Information",
+             buttons: {
+                 OK: function () { $(this).dialog("close"); }
+             }
+         });
+         $('#popupwindow').html(msg);
+         $("#popupwindow").dialog("open");
+     }
+
      function CloseMsg(value, txtValue) {
          HideDialog(value, txtValue);
          //e.preventDefault();
@@ -343,6 +356,13 @@
          });
      }
 
+     function ValidateImageExtension(extension) {
+         if (extension.toLowerCase().indexOf("jpg") >= 0 || extension.toLowerCase().indexOf("jpeg") >= 0 || extension.toLowerCase().indexOf("png") >= 0 || extension.toLowerCase().indexOf("gif") >= 0) {
+             return true;
+         }
+         return false;
+     }
+
      function Validate() {
          var ContactName = $('.ContactName').val();
          var CompanyName = $('.CompanyName').val();
@@ -353,8 +373,30 @@
          var Zip = $('.Zip').val();
          var Phone = $('.Phone').val();
          var Email = $('.Email').val();
-         var Request = $('.Request').val();
+         var RequestText = $('.Request').val();
          var CaptchaValue = $('.Captcha').val();
+
+         var formData = new FormData();
+         var file = document.getElementById("txtUploadFile");
+         var files = file.files;
+         for (var i = 0; i < files.length; i++) {
+             var filename = document.getElementById("txtUploadFile").value;
+             var extension = filename.split('.');
+             extension = extension[extension.length - 1];
+             if (ValidateImageExtension(extension) == false) {
+                 LoadSecondaryMsg('Please upload image files only.');
+                 formData = null;
+                 return false;
+             }
+             var file = files[i];
+             formData.append("photos " + i, file, file.name);
+         }
+
+
+//         var formData = new FormData();
+//         var imagefile = document.getElementById("txtUploadFile").files[0];
+//         var fileName = document.getElementById("txtUploadFile").value;
+//         formData.append("1", imagefile);
 
          if (ContactName == "") {
              $('#dialog4').html("<table style=\"width: 100%; border: 0px;\" cellpadding=\"3\" cellspacing=\"0\"><tr><td colspan=\"2\" style=\"padding-left: 15px;\"><h3><div align=\"center\"><font color=\"#990000\">Please enter Contact Name</font></div></h3></td></tr><tr></tr></table><div class=\"btnOk4\"><input type=\"image\" id=\"ok4\" value=\"OK\" onclick=\"CloseMsg(4, 'ContactName');\" src=\"Content/Close Button.png\")\"; /></div>");
@@ -364,77 +406,77 @@
          }
 
          if (CompanyName == "") {
-             $('#dialog4').html("<table style=\"width: 100%; border: 0px;\" cellpadding=\"3\" cellspacing=\"0\"><tr><td colspan=\"2\" style=\"padding-left: 15px;\"><h3><div align=\"center\"><font color=\"#990000\">Please enter Company Name</font></div></h3></td></tr><tr></tr></table><div class=\"btnOk4\"><input type=\"image\" id=\"ok4\" value=\"OK\" onclick=\"CloseMsg(4, 'CompanyName');\" src=\"Close Button.png\")\"; /></div>");
+             $('#dialog4').html("<table style=\"width: 100%; border: 0px;\" cellpadding=\"3\" cellspacing=\"0\"><tr><td colspan=\"2\" style=\"padding-left: 15px;\"><h3><div align=\"center\"><font color=\"#990000\">Please enter Company Name</font></div></h3></td></tr><tr></tr></table><div class=\"btnOk4\"><input type=\"image\" id=\"ok4\" value=\"OK\" onclick=\"CloseMsg(4, 'CompanyName');\" src=\"Content/Close Button.png\")\"; /></div>");
              ShowDialog(true, 4);
              $('.CompanyName').focus();
              return false;
          }
 
          if (Address == "") {
-             $('#dialog4').html("<table style=\"width: 100%; border: 0px;\" cellpadding=\"3\" cellspacing=\"0\"><tr><td colspan=\"2\" style=\"padding-left: 15px;\"><h3><div align=\"center\"><font color=\"#990000\">Please enter Address</font></div></h3></td></tr><tr></tr></table><div class=\"btnOk4\"><input type=\"image\" id=\"ok4\" value=\"OK\" onclick=\"CloseMsg(4, 'Address');\" src=\"Close Button.png\")\"; /></div>");
+             $('#dialog4').html("<table style=\"width: 100%; border: 0px;\" cellpadding=\"3\" cellspacing=\"0\"><tr><td colspan=\"2\" style=\"padding-left: 15px;\"><h3><div align=\"center\"><font color=\"#990000\">Please enter Address</font></div></h3></td></tr><tr></tr></table><div class=\"btnOk4\"><input type=\"image\" id=\"ok4\" value=\"OK\" onclick=\"CloseMsg(4, 'Address');\" src=\"Content/Close Button.png\")\"; /></div>");
              ShowDialog(true, 4);
              $('.Address').focus();
              return false;
          }
 
          if (City == "") {
-             $('#dialog4').html("<table style=\"width: 100%; border: 0px;\" cellpadding=\"3\" cellspacing=\"0\"><tr><td colspan=\"2\" style=\"padding-left: 15px;\"><h3><div align=\"center\"><font color=\"#990000\">Please enter City</font></div></h3></td></tr><tr></tr></table><div class=\"btnOk4\"><input type=\"image\" id=\"ok4\" value=\"OK\" onclick=\"CloseMsg(4, 'City');\" src=\"Close Button.png\")\"; /></div>");
+             $('#dialog4').html("<table style=\"width: 100%; border: 0px;\" cellpadding=\"3\" cellspacing=\"0\"><tr><td colspan=\"2\" style=\"padding-left: 15px;\"><h3><div align=\"center\"><font color=\"#990000\">Please enter City</font></div></h3></td></tr><tr></tr></table><div class=\"btnOk4\"><input type=\"image\" id=\"ok4\" value=\"OK\" onclick=\"CloseMsg(4, 'City');\" src=\"Content/Close Button.png\")\"; /></div>");
              ShowDialog(true, 4);
              $('.City').focus();
              return false;
          }
 
          if (State == "") {
-             $('#dialog4').html("<table style=\"width: 100%; border: 0px;\" cellpadding=\"3\" cellspacing=\"0\"><tr><td colspan=\"2\" style=\"padding-left: 15px;\"><h3><div align=\"center\"><font color=\"#990000\">Please enter State</font></div></h3></td></tr><tr></tr></table><div class=\"btnOk4\"><input type=\"image\" id=\"ok4\" value=\"OK\" onclick=\"CloseMsg(4, 'State');\" src=\"Close Button.png\")\"; /></div>");
+             $('#dialog4').html("<table style=\"width: 100%; border: 0px;\" cellpadding=\"3\" cellspacing=\"0\"><tr><td colspan=\"2\" style=\"padding-left: 15px;\"><h3><div align=\"center\"><font color=\"#990000\">Please enter State</font></div></h3></td></tr><tr></tr></table><div class=\"btnOk4\"><input type=\"image\" id=\"ok4\" value=\"OK\" onclick=\"CloseMsg(4, 'State');\" src=\"Content/Close Button.png\")\"; /></div>");
              ShowDialog(true, 4);
              $('.State').focus();
              return false;
          }
 
          if (Zip == "") {
-             $('#dialog4').html("<table style=\"width: 100%; border: 0px;\" cellpadding=\"3\" cellspacing=\"0\"><tr><td colspan=\"2\" style=\"padding-left: 15px;\"><h3><div align=\"center\"><font color=\"#990000\">Please enter Zip</font></div></h3></td></tr><tr></tr></table><div class=\"btnOk4\"><input type=\"image\" id=\"ok4\" value=\"OK\" onclick=\"CloseMsg(4, 'Zip');\" src=\"Close Button.png\")\"; /></div>");
+             $('#dialog4').html("<table style=\"width: 100%; border: 0px;\" cellpadding=\"3\" cellspacing=\"0\"><tr><td colspan=\"2\" style=\"padding-left: 15px;\"><h3><div align=\"center\"><font color=\"#990000\">Please enter Zip</font></div></h3></td></tr><tr></tr></table><div class=\"btnOk4\"><input type=\"image\" id=\"ok4\" value=\"OK\" onclick=\"CloseMsg(4, 'Zip');\" src=\"Content/Close Button.png\")\"; /></div>");
              ShowDialog(true, 4);
              $('.Zip').focus();
              return false;
          }
 
          if (validateZip(Zip) == false) {
-             $('#dialog4').html("<table style=\"width: 100%; border: 0px;\" cellpadding=\"3\" cellspacing=\"0\"><tr><td colspan=\"2\" style=\"padding-left: 15px;\"><h3><div align=\"center\"><font color=\"#990000\">Please enter Valid Zip Code</font></div></h3></td></tr><tr></tr></table><div class=\"btnOk4\"><input type=\"image\" id=\"ok4\" value=\"OK\" onclick=\"CloseMsg(4, 'Zip');\" src=\"Close Button.png\")\"; /></div>");
+             $('#dialog4').html("<table style=\"width: 100%; border: 0px;\" cellpadding=\"3\" cellspacing=\"0\"><tr><td colspan=\"2\" style=\"padding-left: 15px;\"><h3><div align=\"center\"><font color=\"#990000\">Please enter Valid Zip Code</font></div></h3></td></tr><tr></tr></table><div class=\"btnOk4\"><input type=\"image\" id=\"ok4\" value=\"OK\" onclick=\"CloseMsg(4, 'Zip');\" src=\"Content/Close Button.png\")\"; /></div>");
              ShowDialog(true, 4);
              $('.Zip').focus();
              return false;
          }
 
          if (Phone == "") {
-             $('#dialog4').html("<table style=\"width: 100%; border: 0px;\" cellpadding=\"3\" cellspacing=\"0\"><tr><td colspan=\"2\" style=\"padding-left: 15px;\"><h3><div align=\"center\"><font color=\"#990000\">Please enter Phone Number</font></div></h3></td></tr><tr></tr></table><div class=\"btnOk4\"><input type=\"image\" id=\"ok4\" value=\"OK\" onclick=\"CloseMsg(4, 'Phone');\" src=\"Close Button.png\")\"; /></div>");
+             $('#dialog4').html("<table style=\"width: 100%; border: 0px;\" cellpadding=\"3\" cellspacing=\"0\"><tr><td colspan=\"2\" style=\"padding-left: 15px;\"><h3><div align=\"center\"><font color=\"#990000\">Please enter Phone Number</font></div></h3></td></tr><tr></tr></table><div class=\"btnOk4\"><input type=\"image\" id=\"ok4\" value=\"OK\" onclick=\"CloseMsg(4, 'Phone');\" src=\"Content/Close Button.png\")\"; /></div>");
              ShowDialog(true, 4);
              $('.Phone').focus();
              return false;
          }
 
          if (checkPhoneNumber(Phone) == false) {
-             $('#dialog4').html("<table style=\"width: 100%; border: 0px;\" cellpadding=\"3\" cellspacing=\"0\"><tr><td colspan=\"2\" style=\"padding-left: 15px;\"><h3><div align=\"center\"><font color=\"#990000\">Please enter a valid Phone Number</font></div></h3></td></tr><tr></tr></table><div class=\"btnOk4\"><input type=\"image\" id=\"ok4\" value=\"OK\" onclick=\"CloseMsg(4, 'Phone');\" src=\"Close Button.png\")\"; /></div>");
+             $('#dialog4').html("<table style=\"width: 100%; border: 0px;\" cellpadding=\"3\" cellspacing=\"0\"><tr><td colspan=\"2\" style=\"padding-left: 15px;\"><h3><div align=\"center\"><font color=\"#990000\">Please enter a valid Phone Number</font></div></h3></td></tr><tr></tr></table><div class=\"btnOk4\"><input type=\"image\" id=\"ok4\" value=\"OK\" onclick=\"CloseMsg(4, 'Phone');\" src=\"Content/Close Button.png\")\"; /></div>");
              ShowDialog(true, 4);
              $('.Phone').focus();
              return false;
          }
 
          if (Email == "") {
-             $('#dialog4').html("<table style=\"width: 100%; border: 0px;\" cellpadding=\"3\" cellspacing=\"0\"><tr><td colspan=\"2\" style=\"padding-left: 15px;\"><h3><div align=\"center\"><font color=\"#990000\">Please enter Email</font></div></h3></td></tr><tr></tr></table><div class=\"btnOk4\"><input type=\"image\" id=\"ok4\" value=\"OK\" onclick=\"CloseMsg(4, 'Email');\" src=\"Close Button.png\")\"; /></div>");
+             $('#dialog4').html("<table style=\"width: 100%; border: 0px;\" cellpadding=\"3\" cellspacing=\"0\"><tr><td colspan=\"2\" style=\"padding-left: 15px;\"><h3><div align=\"center\"><font color=\"#990000\">Please enter Email</font></div></h3></td></tr><tr></tr></table><div class=\"btnOk4\"><input type=\"image\" id=\"ok4\" value=\"OK\" onclick=\"CloseMsg(4, 'Email');\" src=\"Content/Close Button.png\")\"; /></div>");
              ShowDialog(true, 4);
              $('.Email').focus();
              return false;
          }
 
          if (checkEmail(Email) == false) {
-             $('#dialog4').html("<table style=\"width: 100%; border: 0px;\" cellpadding=\"3\" cellspacing=\"0\"><tr><td colspan=\"2\" style=\"padding-left: 15px;\"><h3><div align=\"center\"><font color=\"#990000\">Please enter a Valid Email</font></div></h3></td></tr><tr></tr></table><div class=\"btnOk4\"><input type=\"image\" id=\"ok4\" value=\"OK\" onclick=\"CloseMsg(4, 'Email');\" src=\"Close Button.png\")\"; /></div>");
+             $('#dialog4').html("<table style=\"width: 100%; border: 0px;\" cellpadding=\"3\" cellspacing=\"0\"><tr><td colspan=\"2\" style=\"padding-left: 15px;\"><h3><div align=\"center\"><font color=\"#990000\">Please enter a Valid Email</font></div></h3></td></tr><tr></tr></table><div class=\"btnOk4\"><input type=\"image\" id=\"ok4\" value=\"OK\" onclick=\"CloseMsg(4, 'Email');\" src=\"Content/Close Button.png\")\"; /></div>");
              ShowDialog(true, 4);
              $('.Email').focus();
              return false;
          }
 
          if (Request == "") {
-             $('#dialog4').html("<table style=\"width: 100%; border: 0px;\" cellpadding=\"3\" cellspacing=\"0\"><tr><td colspan=\"2\" style=\"padding-left: 15px;\"><h3><div align=\"center\"><font color=\"#990000\">Please enter Request</font></div></h3></td></tr><tr></tr></table><div class=\"btnOk4\"><input type=\"image\" id=\"ok4\" value=\"OK\" onclick=\"CloseMsg(4, 'Request');\" src=\"Close Button.png\")\"; /></div>");
+             $('#dialog4').html("<table style=\"width: 100%; border: 0px;\" cellpadding=\"3\" cellspacing=\"0\"><tr><td colspan=\"2\" style=\"padding-left: 15px;\"><h3><div align=\"center\"><font color=\"#990000\">Please enter Request</font></div></h3></td></tr><tr></tr></table><div class=\"btnOk4\"><input type=\"image\" id=\"ok4\" value=\"OK\" onclick=\"CloseMsg(4, 'Request');\" src=\"Content/Close Button.png\")\"; /></div>");
              ShowDialog(true, 4);
              $('.Request').focus();
              return false;
@@ -466,9 +508,12 @@
              $.ajax({
                  type: "POST",
                  async: true,
-                 url: '@Url.Action("PostForm", "Home")',
-                 data: { ContactName: ContactName, CompanyName: CompanyName, Address: Address, City: City, State: State, Zip: Zip, Phone: Phone, Email: Email, Request: Request, Captcha: CaptchaValue
-                 },
+                 //url: '@Url.Action("PostForm", "Home")',
+                 url: "/Home/PostForm?ContactName=" + ContactName + "&CompanyName=" + CompanyName + "&Address=" + Address + "&City=" + City + "&State=" + State + "&Zip=" + Zip + "&Phone=" + Phone + "&Email=" + Email + "&RequestText=" + RequestText + "&Captcha=" + CaptchaValue,                 
+                 contentType: false,
+                 processData: false,
+                 data: formData,
+                 //data: { ContactName: ContactName, CompanyName: CompanyName, Address: Address, City: City, State: State, Zip: Zip, Phone: Phone, Email: Email, Request: Request, Captcha: CaptchaValue
                  success: function (data) {
                      if (data == "Success") {
                          $('#dvLoading').empty();
@@ -548,11 +593,10 @@
  <div id="MainBodyWrapper">
                 <br />
                <br />
- <div class="PageTitle">Rhinestone Empire - Contact Us
- </div>
-       <br />
-       <br />
-       <br />
+     <div id="imgRhineStoneDiv">
+         <img id="imgRhineStone" src="/Content/RhinestoneEmpire.jpg" />
+         <!--<div class="PageTitle">Inquiry</div>-->
+     </div>
        <table style="margin-left:125px;border-collapse:collapse;" cellpadding="6";>
        <tr style="background-color:#D5D5D5">
        <td width="250px">
@@ -663,6 +707,15 @@
        </td>
        </tr>*@
 
+           <tr style="background-color:#D5D5D5">
+               <td>
+                   <div class="label">Upload Images:</div>
+               </td>
+               <td>
+                   <input type="file" name="images" id="txtUploadFile" multiple="multiple"/>
+               </td>
+           </tr>
+
 
        <tr>
        <td>
@@ -694,6 +747,7 @@
        </td>
        </tr>
        </table>
+       <div id="popupwindow" title="Information"></div>
  </div>
 
  

@@ -5,3 +5,4 @@ C:\Users\stevey\Documents\GitHub\ContactForm\ContactForm\bin\EntityFramework.dll
 C:\Users\stevey\Documents\GitHub\ContactForm\ContactForm\bin\EntityFramework.xml
 C:\Users\stevey\Documents\GitHub\ContactForm\ContactForm\obj\Release\ContactForm.dll
 C:\Users\stevey\Documents\GitHub\ContactForm\ContactForm\obj\Release\ContactForm.pdb
+C:\Users\stevey\Documents\GitHub\ContactForm\ContactForm\obj\Release\ContactForm.csprojResolveAssemblyReference.cache

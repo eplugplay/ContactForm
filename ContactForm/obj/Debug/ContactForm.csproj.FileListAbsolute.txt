@@ -4,11 +4,10 @@ c:\users\stevey\documents\visual studio 2010\Projects\ContactForm\ContactForm\bi
 c:\users\stevey\documents\visual studio 2010\Projects\ContactForm\ContactForm\bin\EntityFramework.xml
 c:\users\stevey\documents\visual studio 2010\Projects\ContactForm\ContactForm\obj\Debug\ContactForm.dll
 c:\users\stevey\documents\visual studio 2010\Projects\ContactForm\ContactForm\obj\Debug\ContactForm.pdb
+C:\Users\stevey\Documents\GitHub\ContactForm\ContactForm\bin\ContactForm.dll.config
 C:\Users\stevey\Documents\GitHub\ContactForm\ContactForm\bin\ContactForm.dll
 C:\Users\stevey\Documents\GitHub\ContactForm\ContactForm\bin\ContactForm.pdb
 C:\Users\stevey\Documents\GitHub\ContactForm\ContactForm\bin\EntityFramework.dll
 C:\Users\stevey\Documents\GitHub\ContactForm\ContactForm\bin\EntityFramework.xml
 C:\Users\stevey\Documents\GitHub\ContactForm\ContactForm\obj\Debug\ContactForm.dll
 C:\Users\stevey\Documents\GitHub\ContactForm\ContactForm\obj\Debug\ContactForm.pdb
-C:\Users\stevey\Documents\GitHub\ContactForm\ContactForm\bin\ContactForm.dll.config
-C:\Users\stevey\Documents\GitHub\ContactForm\ContactForm\obj\Debug\ContactForm.csprojResolveAssemblyReference.cache
